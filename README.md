@@ -6,4 +6,5 @@ Seguire la guida per l'installazione del Developer Quickstart di Besu, vi sono a
 https://besu.hyperledger.org/development/private-networks/tutorials/quickstart
 
 # NOTE
-Nota che al momento ho lasciato tutte le installazione di default di Besu senza seguire la guida
+- Al momento ho lasciato tutte le installazione di default di Besu senza seguire la guida;
+- Su Linux, installare solo Docker Desktop e non seguire la guida per installare l'engine separatamente (altrimenti crea due context)
