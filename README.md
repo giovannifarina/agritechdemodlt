@@ -14,3 +14,8 @@ Questo Tutorial Collegat REMIX e Metamask a Besu https://www.youtube.com/watch?v
 # NOTE
 - Al momento ho lasciato tutte le installazione di default di Besu senza seguire la guida;
 - Su Linux, installare solo Docker Desktop e non seguire la guida per installare l'engine separatamente (altrimenti crea due context)
+
+
+Get EVM version
+
+```curl -X POST --data '{"jsonrpc":"2.0","method":"eth_protocolVersion","params":[],"id":1}' -H "Content-Type: application/json" http://localhost:8545```
