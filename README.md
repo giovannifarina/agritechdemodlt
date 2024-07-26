@@ -9,7 +9,7 @@ Seguire la guida per l'installazione del Developer Quickstart di Besu, vi sono a
 https://besu.hyperledger.org/development/private-networks/tutorials/quickstart
 
 
-Per lo sviluppo di smart contract sembra si possa usare https://medium.com/coinmonks/how-to-set-up-your-environment-for-solidity-development-on-vs-code-7754a3abaf1f
+Questo Tutorial Collegat REMIX e Metamask a Besu https://www.youtube.com/watch?v=2dGRIlvmvOE
 
 # NOTE
 - Al momento ho lasciato tutte le installazione di default di Besu senza seguire la guida;
