@@ -16,7 +16,7 @@ Questo Tutorial Collegat REMIX e Metamask a Besu https://www.youtube.com/watch?v
 
 - Tutorial Sviluppo DLT https://youtu.be/jcgfQEbptdo?si=zxjuOoFzo-TX0sjh
 
-- **Visibilità Variabili** - https://docs.soliditylang.org/en/latest/contracts.html
+- **Logging Data With Events** - https://ethereum.org/uz/developers/tutorials/logging-events-smart-contracts/
 
 Codice Identificativo Bonivo : IT + 12 cifre
 
