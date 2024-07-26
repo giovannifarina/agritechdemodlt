@@ -16,6 +16,8 @@ Questo Tutorial Collegat REMIX e Metamask a Besu https://www.youtube.com/watch?v
 
 - Tutorial Sviluppo DLT https://youtu.be/jcgfQEbptdo?si=zxjuOoFzo-TX0sjh
 
+- **Visibilità Variabili** - https://docs.soliditylang.org/en/latest/contracts.html
+
 # NOTE
 - Al momento ho lasciato tutte le installazione di default di Besu senza seguire la guida;
 - Su Linux, installare solo Docker Desktop e non seguire la guida per installare l'engine separatamente (altrimenti crea due context)
