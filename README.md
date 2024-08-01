@@ -2,6 +2,11 @@ Truffle Project, testabile con Ganache o Remix
 
 Gli script di test richiedono Node.js versione 18 e web3.js installato
 
+# Istruzioni Incomplete
+
+- truffle develop
+- migrate
+
 # Note Use Case
 
 Codice Identificativo Bonivo : IT + 12 cifre

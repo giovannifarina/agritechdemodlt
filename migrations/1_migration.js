@@ -1,4 +1,4 @@
-var MyContract = artifacts.require("Agritech");
+var MyContract = artifacts.require("AgritechDemo");
 
 module.exports = function(deployer) {
   // deployment steps

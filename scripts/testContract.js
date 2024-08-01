@@ -5,8 +5,8 @@ const fs = require('fs');
 const web3 = new Web3('http://localhost:7545');
 
 // Load the contract ABI and address
-const contractABI = JSON.parse(fs.readFileSync('/Users/giovannifarina/TestTruffle/build/contracts/Agritech.json')).abi;
-const contractAddress = '0xbAFb5d7c6DA491951CAed0F8C41Cfaeecbad0264'; // Replace with your deployed contract address
+const contractABI = JSON.parse(fs.readFileSync('../build/contracts/AgritechDemo.json')).abi;
+const contractAddress = '0x28E3b1fB6BCC2A1EC3ed92B3B38c02FF8ba7F6fA'; // Replace with your deployed contract address
 
 // Create a contract instance
 const agritechDemo = new web3.eth.Contract(contractABI, contractAddress);
@@ -24,13 +24,13 @@ async function interactWithContract() {
         const device1 = accounts[4];
         const device2 = accounts[5]
 
-        /*
+        
         // Register new admin
-        //console.log('Test registering second admin');
-        //await agritechDemo.methods.registerNewAdmin(admin2).send({ from: admin1 });
+        console.log('Test registering second admin');
+        await agritechDemo.methods.registerNewAdmin(admin2).send({ from: admin1 });
 
         // Register actor 1
-        //console.log('Registering actor 1');
+        console.log('Registering actor 1');
         await agritechDemo.methods.registerNewActor(actor1).send({ from: admin1 });
 
         // Register actor 2
@@ -42,8 +42,8 @@ async function interactWithContract() {
         const registerTime = Math.floor(Date.now() / 1000);
         await agritechDemo.methods.registerNewDevice(device1, actor1, registerTime).send({ from: admin1 });
 
-        */
-
+        
+        /*
         console.log('Registering new device...');
         const registerTime = Math.floor(Date.now() / 1000);
         await agritechDemo.methods.registerNewDevice(device2, actor2, registerTime).send({ from: admin1 });

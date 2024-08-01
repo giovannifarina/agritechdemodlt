@@ -85,7 +85,7 @@ contract AgritechDemo {
 
     constructor() {
         addrToRole[msg.sender] = Roles.Administrator;
-        emit ContractDeployed(msg.sender);
+        //emit ContractDeployed(msg.sender);
     }
 
     modifier onlyAdministrators{
