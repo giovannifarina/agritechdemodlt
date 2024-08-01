@@ -1,5 +1,12 @@
-Link Repository Temporaneo per lo Smart Contract:
-https://github.com/giovannifarina/RemixAgritech
+Truffle Project, testabile con Ganache o Remix
+
+Gli script di test richiedono Node.js versione 18 e web3.js installato
+
+# Note Use Case
+
+Codice Identificativo Bonivo : IT + 12 cifre
+
+# Besu
 
 Seguire la guida per l'installazione del Developer Quickstart di Besu, vi sono alcuni software come prerequisito.
 - Dopo la prima instruzione per installare node bisogna chiudere il terminale
@@ -11,18 +18,11 @@ Seguire la guida per l'installazione del Developer Quickstart di Besu, vi sono a
 
 https://besu.hyperledger.org/development/private-networks/tutorials/quickstart
 
+# Extra Links
 
-Questo Tutorial Collegat REMIX e Metamask a Besu https://www.youtube.com/watch?v=2dGRIlvmvOE
+- Tutorial Collegamento REMIX e Metamask a Besu https://www.youtube.com/watch?v=2dGRIlvmvOE
 
 - Tutorial Sviluppo DLT https://youtu.be/jcgfQEbptdo?si=zxjuOoFzo-TX0sjh
-
-- **Logging Data With Events** - https://ethereum.org/uz/developers/tutorials/logging-events-smart-contracts/
-
-Codice Identificativo Bonivo : IT + 12 cifre
-
-# NOTE
-- Al momento ho lasciato tutte le installazione di default di Besu senza seguire la guida;
-- Su Linux, installare solo Docker Desktop e non seguire la guida per installare l'engine separatamente (altrimenti crea due context)
 
 # Esempi Curl Requests
 
