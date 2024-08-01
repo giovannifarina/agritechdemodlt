@@ -7,6 +7,10 @@ Gli script di test richiedono Node.js versione 18 e web3.js installato
 - truffle develop
 - migrate
 
+# Note Lavoro
+
+- Se faccio truffle migrate gli eventi e gli aggiornamenti su blockchain sembrano non andare
+
 # Note Use Case
 
 Codice Identificativo Bonivo : IT + 12 cifre
