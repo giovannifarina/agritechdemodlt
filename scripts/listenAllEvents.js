@@ -6,7 +6,7 @@ const web3 = new Web3('http://localhost:7545');
 
 // Load the contract ABI and address
 const contractABI = JSON.parse(fs.readFileSync('../build/contracts/AgritechDemo.json')).abi;
-const contractAddress = '0x28E3b1fB6BCC2A1EC3ed92B3B38c02FF8ba7F6fA'; // Replace with your deployed contract address
+const contractAddress = '0x4e38a50e27243E70263FB3A7cC6F96245E55Cc6D'; // Replace with your deployed contract address
 
 // Create a contract instance
 const contract = new web3.eth.Contract(contractABI, contractAddress);
@@ -27,14 +27,21 @@ async function scanBlocksForEvents(startBlock, endBlock) {
                     
                     for (let log of receipt.logs) {
                         try {
+                            const eventAbi = contract.options.jsonInterface.find(o => o.type === 'event' && o.signature === log.topics[0]);
+                            
+                            if (!eventAbi) {
+                                console.log('Unknown event signature:', log.topics[0]);
+                                continue;
+                            }
+        
                             const event = web3.eth.abi.decodeLog(
-                                contract.options.jsonInterface.find(o => o.type === 'event' && o.signature === log.topics[0]).inputs,
+                                eventAbi.inputs,
                                 log.data,
                                 log.topics.slice(1)
                             );
-
+        
                             console.log('Event detected:');
-                            console.log('Event Name:', log.topics[0]);
+                            console.log('Event Name:', eventAbi.name);  // This line is updated
                             console.log('Event Data:', event);
                             console.log('Transaction Hash:', tx.hash);
                             console.log('Block Number:', i);
