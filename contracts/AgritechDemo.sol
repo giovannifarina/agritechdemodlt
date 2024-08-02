@@ -127,6 +127,7 @@ contract AgritechDemo {
             return false;
     }
 
+    // QUESTA FUNZIONE SEMBRA AVERE PROBLEMI DI GAS
     function addCow (string calldata _cowId, timestamp _registrationTime) public {
         // VALIDITY CHECKS
         bytes14 cowIdBytes14 = checkAndConvertCowId(_cowId);

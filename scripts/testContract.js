@@ -6,7 +6,7 @@ const web3 = new Web3('http://localhost:7545');
 
 // Load the contract ABI and address
 const contractABI = JSON.parse(fs.readFileSync('../build/contracts/AgritechDemo.json')).abi;
-const contractAddress = '0x4e38a50e27243E70263FB3A7cC6F96245E55Cc6D'; // Replace with your deployed contract address
+const contractAddress = '0xe7477b0D108f634f7363b9614F5eb9741BDa0D8d'; // Replace with your deployed contract address
 
 // Create a contract instance
 const agritechDemo = new web3.eth.Contract(contractABI, contractAddress);
@@ -54,8 +54,13 @@ async function interactWithContract() {
 
         // console.log('Adding new cow without device associated');
         console.log('Associating device1 to cowId1');
-        const startTime = Math.floor(Date.now() / 1000);
+        startTime = Math.floor(Date.now() / 1000);
         await agritechDemo.methods.associateDeviceToCow(cowId1, device1, startTime).send({ from: actor1 });
+
+        console.log('Associating device2 to a new cowId2');
+        const cowId2 = "IT345678901235";
+        startTime = Math.floor(Date.now() / 1000);
+        await agritechDemo.methods.associateDeviceToCow(cowId2, device2, startTime).send({ from: actor2, gas: '2000000' });
 
         
         /*
