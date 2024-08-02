@@ -6,7 +6,7 @@ const web3 = new Web3('http://localhost:7545');
 
 // Load the contract ABI and address
 const contractABI = JSON.parse(fs.readFileSync('../build/contracts/AgritechDemo.json')).abi;
-const contractAddress = '0x5096B74dD3eA1b54831aa4a016a57A37b7Fe21c0'; // Replace with your deployed contract address
+const contractAddress = '0x4e38a50e27243E70263FB3A7cC6F96245E55Cc6D'; // Replace with your deployed contract address
 
 // Create a contract instance
 const agritechDemo = new web3.eth.Contract(contractABI, contractAddress);
@@ -23,7 +23,6 @@ async function interactWithContract() {
         const actor2 = accounts[3];
         const device1 = accounts[4];
         const device2 = accounts[5]
-
         
         // Register new admin
         console.log('Test registering second admin');
@@ -38,16 +37,27 @@ async function interactWithContract() {
         await agritechDemo.methods.registerNewActor(actor2).send({ from: admin1 });
 
         // Register new device 1
-        console.log('Registering new device...');
-        const registerTime = Math.floor(Date.now() / 1000);
+        console.log('Registering device 1');
+        registerTime = Math.floor(Date.now() / 1000);
         await agritechDemo.methods.registerNewDevice(device1, actor1, registerTime).send({ from: admin1 });
 
-        
-        /*
-        console.log('Registering new device...');
-        const registerTime = Math.floor(Date.now() / 1000);
+        // Register new device 2
+        console.log('Registering device 2');
+        registerTime = Math.floor(Date.now() / 1000);
         await agritechDemo.methods.registerNewDevice(device2, actor2, registerTime).send({ from: admin1 });
 
+        // console.log('Adding new cow without device associated');
+        console.log('Adding new cow without device associated');
+        const cowId1 = "IT345678901234";
+        const registrationTime = Math.floor(Date.now() / 1000);
+        await agritechDemo.methods.addCow(cowId1, registrationTime).send({ from: actor1, gas: '2000000'});
+
+        // console.log('Adding new cow without device associated');
+        console.log('Associating device1 to cowId1');
+        const startTime = Math.floor(Date.now() / 1000);
+        await agritechDemo.methods.associateDeviceToCow(cowId1, device1, startTime).send({ from: actor1 });
+
+        
         /*
         // Add cow
         console.log('Adding new cow...');
