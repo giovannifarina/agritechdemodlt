@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity ^0.8.0; // Gio: il mio setting locale da problemi con versioni superiori sull'installazione locale di Besu
+pragma solidity ^0.8.0 <=0.8.19; // Gio: il mio setting locale da problemi con versioni superiori sull'installazione locale di Besu
 
 /* 
     ASSUNZIONI:
