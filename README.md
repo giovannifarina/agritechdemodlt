@@ -12,9 +12,9 @@ Gli script di test richiedono Node.js versione 18 e web3.js installato
 # Note Use Case
 
 Codice Identificativo Bonivo : IT + 12 cifre
+Timestamp come Unixtime
 
-Manca un meccanismo di controllo di inserimento di dati di una mucca, potenzialmente un secondo attore potrebbe dichiarare una nuova di coordinate sullo stesso cowId
-Ci possono essere due collari sulla stessa mucca
+GeoJSON is a widely used format for encoding geographic data in JSON (JavaScript Object Notation).
 
 # Besu
 

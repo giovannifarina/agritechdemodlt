@@ -24,35 +24,28 @@ async function interactWithContract() {
         const device1 = accounts[4];
         const device2 = accounts[5]
         
-        // Register new admin
-        console.log('Test registering second admin');
+        console.log('Registering second admin2');
         await agritechDemo.methods.registerNewAdmin(admin2).send({ from: admin1 });
 
-        // Register actor 1
-        console.log('Registering actor 1');
+        console.log('Registering actor1');
         await agritechDemo.methods.registerNewActor(actor1).send({ from: admin1 });
 
-        // Register actor 2
-        console.log('Registering actor 2');
+        console.log('Registering actor2');
         await agritechDemo.methods.registerNewActor(actor2).send({ from: admin1 });
 
-        // Register new device 1
-        console.log('Registering device 1');
+        console.log('Registering device1');
         registerTime = Math.floor(Date.now() / 1000);
         await agritechDemo.methods.registerNewDevice(device1, actor1, registerTime).send({ from: admin1 });
 
-        // Register new device 2
-        console.log('Registering device 2');
+        console.log('Registering device2');
         registerTime = Math.floor(Date.now() / 1000);
         await agritechDemo.methods.registerNewDevice(device2, actor2, registerTime).send({ from: admin1 });
 
-        // console.log('Adding new cow without device associated');
         console.log('Adding new cow without device associated');
         const cowId1 = "IT345678901234";
         const registrationTime = Math.floor(Date.now() / 1000);
         await agritechDemo.methods.addCow(cowId1, registrationTime).send({ from: actor1, gas: '2000000'});
 
-        // console.log('Adding new cow without device associated');
         console.log('Associating device1 to cowId1');
         startTime = Math.floor(Date.now() / 1000);
         await agritechDemo.methods.associateDeviceToCow(cowId1, device1, startTime).send({ from: actor1 });
