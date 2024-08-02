@@ -150,6 +150,7 @@ contract AgritechDemo {
         require(deviceAssociation.currentCow == EMPTYCOWID, "The device is associated to another cow");
         bytes14 cowIdBytes14 = checkAndConvertCowId(_cowId);
         require(pendingOwnerships[cowIdBytes14].newOwner == address(0), "Cannot associate a device to a pending transfer of ownership");
+        require(!hasCowAssociatedDevice[cowIdBytes14], "cowId is already associated to another device");
 
         // add cow if not registered yet
         if (!isCowRegistered(cowIdBytes14))
@@ -173,8 +174,6 @@ contract AgritechDemo {
         deviceAssociations[_deviceAddress].currentCow = EMPTYCOWID;
         delete hasCowAssociatedDevice[cowIdBytes14];
         emit CowToDeviceDissociated(_endTime, cowIdBytes14, _deviceAddress);
-        
-        // Aggiungere come requisito per il trasferimento
     }
 
     function transferOwnership(string calldata _cowId, address _newOwner, timestamp _transferTime) public {
@@ -185,7 +184,7 @@ contract AgritechDemo {
         require(addrToRole[_newOwner] == Roles.Actor, "Only actors can be the new owner");
         require(_newOwner != msg.sender, "New owner must be different from the current owner");
         require(pendingOwnerships[cowIdBytes14].newOwner == address(0), "A transfer is already pending");
-        require(!hasCowAssociatedDevice[cowIdBytes14], "The cow has not to bo associated to a device to transfer the ownership");
+        require(!hasCowAssociatedDevice[cowIdBytes14], "The cow has not to be associated to a device to transfer the ownership");
 
         // PENDING TRANSFER
         PendingOwnershipData memory newPOD = PendingOwnershipData({
