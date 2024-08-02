@@ -9,11 +9,12 @@ Gli script di test richiedono Node.js versione 18 e web3.js installato
 
 # Note Lavoro
 
-- Se faccio truffle migrate gli eventi e gli aggiornamenti su blockchain sembrano non andare
-
 # Note Use Case
 
 Codice Identificativo Bonivo : IT + 12 cifre
+
+Manca un meccanismo di controllo di inserimento di dati di una mucca, potenzialmente un secondo attore potrebbe dichiarare una nuova di coordinate sullo stesso cowId
+Ci possono essere due collari sulla stessa mucca
 
 # Besu
 
