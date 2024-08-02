@@ -1,12 +1,13 @@
 const { Web3 } = require('web3');
 const fs = require('fs');
+const crypto = require('crypto');
 
 // Connect to an Ethereum network (replace with your network URL)
 const web3 = new Web3('http://localhost:7545');
 
 // Load the contract ABI and address
 const contractABI = JSON.parse(fs.readFileSync('../build/contracts/AgritechDemo.json')).abi;
-const contractAddress = '0xe7477b0D108f634f7363b9614F5eb9741BDa0D8d'; // Replace with your deployed contract address
+const contractAddress = '0x76F485763e28b2D68aC5d8853eE636CE094EaD43'; // Replace with your deployed contract address
 
 // Create a contract instance
 const agritechDemo = new web3.eth.Contract(contractABI, contractAddress);
@@ -54,6 +55,13 @@ async function interactWithContract() {
         const cowId2 = "IT345678901235";
         startTime = Math.floor(Date.now() / 1000);
         await agritechDemo.methods.associateDeviceToCow(cowId2, device2, startTime).send({ from: actor2, gas: '2000000' });
+
+        const filePath = '../gpsLogExample.json';
+        hashResult = computeJsonSha3FromFile(filePath);
+
+        console.log('Storing integrity segment...');
+        const updateTime = Math.floor(Date.now() / 1000);
+        await agritechDemo.methods.storeIntegritySegment(cowId1, updateTime, hashResult).send({ from: device1 });
 
         
         /*
@@ -104,5 +112,27 @@ async function interactWithContract() {
         console.error('An error occurred:', error);
     }
 }
+
+function computeJsonSha3FromFile(filePath) {
+    try {
+      // Read the JSON file
+      const jsonString = fs.readFileSync(filePath, 'utf8');
+      
+      // Parse the JSON string to ensure it's valid JSON
+      JSON.parse(jsonString);
+      
+      // Create a SHA3-256 hash object
+      const hash = crypto.createHash('sha3-256');
+      
+      // Update the hash object with the JSON string
+      hash.update(jsonString);
+      
+      // Generate and return the hexadecimal representation of the hash
+      return '0x' + hash.digest('hex');
+    } catch (error) {
+      console.error('Error:', error.message);
+      return null;
+    }
+  }
 
 interactWithContract();
