@@ -13,6 +13,7 @@ Gli script di test richiedono Node.js versione 18 e web3.js installato
 
 Codice Identificativo Bonivo : IT + 12 cifre
 Timestamp come Unixtime
+Un unico hash di integrity per mucca per semplicità fatto da tutto lo storico
 
 GeoJSON is a widely used format for encoding geographic data in JSON (JavaScript Object Notation).
 
