@@ -1,14 +1,12 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity ^0.8.0 <=0.8.19; // Gio: il mio setting locale da problemi con versioni superiori sull'installazione locale di Besu
+pragma solidity ^0.8.0 <=0.8.19; // al momento il codice da problemi a partire dalla versione 8.20;
 
 /* 
     ASSUNZIONI:
     - I timestamp delle operazioni siano forniti dagli invocatori delle funzioni, ci si aspetta quindi che questi valori siano sempre validi e sensati;
     - Si assume che i cowId siano validi (viene fatto un check solo sulla loro lunghezza, fissa a 14 caratteri);
-    - Nel passaggio di ownership si interrompe il tracking della mucca, il collare viene quindi disassociato;
+    - Nel passaggio di ownership puoi avvenire solo dopo aver dissociato il collare dalla mucca;
 */
-
-// ALL FUNCTIONALITIES HAVE TO BE CHECKED!
 
 contract AgritechDemo {
 
@@ -20,6 +18,7 @@ contract AgritechDemo {
     // SHA3-256 produce output da 256 bit _> 32 byte
     //type gpshash is bytes32;
 
+    // Unix Time
     type timestamp is uint256;
 
     bytes14 constant EMPTYCOWID = 0x00; // 2 hex = 1 byte
@@ -43,7 +42,7 @@ contract AgritechDemo {
         address newOwner;
     }
 
-    // Ruoli associati agli address
+    // Ruoli
     enum Roles {
         NoPriviledge, // Gestione ruolo con indice 0 su mapping
         Administrator, // Possono assegnare ruoli
@@ -53,9 +52,7 @@ contract AgritechDemo {
 
     /* EVENTS */
 
-    event ContractDeployed(address deployer); 
-
-    // Evento generato all'associazione di una mucca ad un collare. NOTA: l'aggiunta di una mucca senza l'associazione ad un collare non genera evento
+    // Evento generato all'associazione di una mucca ad un collare. NOTA: l'aggiunta di una mucca SENZA l'associazione ad un collare non genera evento
     event CowToDeviceAssociated(timestamp registrationTime, bytes14 indexed cowId, address deviceAddress);
     event CowToDeviceDissociated(timestamp registrationTime, bytes14 indexed cowId, address deviceAddress);
 
@@ -72,16 +69,16 @@ contract AgritechDemo {
 
     /* STATE VARIABLES */
 
-    // Mappa address : ruolo, ruoli degli account per la gestione dei privilegi. NOTA: quando la chiave non è presente da come valore di default 0, quindi ruolo NoPriviledge
-    mapping(address => Roles) public addrToRole; // TO DO : change to internal
-    // Mappa idMucca : listaOwnership, sequenza di ownerships delle mucche
-    mapping(bytes14 => OwnershipData[]) public cowOwnerships; // TO DO : change to internal
-    // Mappa address : gestore-mucca, tiene traccia dell'associazione del collare ad eventuale gestore e mucca
-    mapping(address => DeviceAssociationData) public deviceAssociations; // TO DO : change to internal
-    // Mappa idMucca : pendingOwner, tiene traccia dei cambi di ownership pending
-    mapping(bytes14 => PendingOwnershipData) public pendingOwnerships; // TO DO : change to internal
-    // Mappa idMucca : bool, tiene traccia del fatto che una mucca ha associato un device (utile per la verifica che una mucca sia senza collare prima del transfer)
-    mapping(bytes14 => bool) public hasCowAssociatedDevice;
+    // Mappa address : ruolo, ruoli associati agli accounts. NOTA: quando la chiave non è presente da come valore di default 0, quindi ruolo NoPriviledge
+    mapping(address => Roles) internal addrToRole;
+    // Mappa idMucca : listaOwnership, sequenza di ownerships delle singole mucche
+    mapping(bytes14 => OwnershipData[]) internal cowOwnerships; 
+    // Mappa address : IdActor-IdMucca, tiene traccia dell'associazione del collare ad eventuale gestore e mucca
+    mapping(address => DeviceAssociationData) internal deviceAssociations; 
+    // Mappa idMucca : pendingOwner, tiene traccia dei cambi di ownership in stato pending
+    mapping(bytes14 => PendingOwnershipData) internal pendingOwnerships; 
+    // Mappa idMucca : bool, tiene traccia del fatto che una mucca abbia associato un device (unicità di associazione + mucca senza collare prima del transfer)
+    mapping(bytes14 => bool) internal hasCowAssociatedDevice;
 
     constructor() {
         addrToRole[msg.sender] = Roles.Administrator;
