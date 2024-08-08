@@ -81,7 +81,7 @@ contract AgritechDemo {
     mapping(bytes14 => bool) internal hasCowAssociatedDevice;
 
     constructor() {
-        addrToRole[msg.sender] = Roles.Administrator;
+        addrToRole[msg.sender] = Roles.Administrator; // chi distribuisce il contratto diviene Admin
         //emit ContractDeployed(msg.sender);
     }
 
@@ -98,7 +98,7 @@ contract AgritechDemo {
 
     function registerNewAdmin (address _adminAddress) external onlyAdministrators notPreviouslyRegistered(_adminAddress) {
         addrToRole[_adminAddress] = Roles.Administrator;
-    } // ✓
+    } 
 
 
     function registerNewActor (address _actorAddress) external onlyAdministrators notPreviouslyRegistered(_actorAddress) {
@@ -111,6 +111,7 @@ contract AgritechDemo {
         emit DeviceRegistered(_registerTime, _deviceAddress, _managerAddress);
     }
 
+    // funzione interna, converte un input in formato stringa in bytes14
     function checkAndConvertCowId (string calldata _cowId) private pure returns (bytes14) { 
         bytes memory cowIdBytes = bytes(_cowId);
         require(cowIdBytes.length <= 14, "cowId too long"); // minimal check invalid cowId
