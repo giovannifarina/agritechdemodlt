@@ -1,5 +1,8 @@
 Truffle Project, testabile con Ganache o Remix
 
+https://archive.trufflesuite.com/ganache/
+https://archive.trufflesuite.com/docs/truffle/how-to/install/
+
 Gli script di test richiedono Node.js versione 18 e web3.js installato
 
 # Istruzioni Incomplete
