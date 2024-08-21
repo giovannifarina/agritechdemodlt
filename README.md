@@ -1,5 +1,7 @@
 Truffle Project, testabile con Ganache o Remix
 
+MANTENGO IN SOLO INTEGRITY SEGMENT, si può aggiornare
+
 https://archive.trufflesuite.com/ganache/
 https://archive.trufflesuite.com/docs/truffle/how-to/install/
 
