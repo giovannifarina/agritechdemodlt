@@ -3,7 +3,7 @@ const fs = require('fs');
 const crypto = require('crypto');
 
 // Connect to an Ethereum network (replace with your network URL)
-const web3 = new Web3('http://localhost:7545');
+const web3 = new Web3('http://172.19.112.1:7545');
 
 // Load the contract ABI and address
 const contractABI = JSON.parse(fs.readFileSync('../build/contracts/AgritechDemo.json')).abi;

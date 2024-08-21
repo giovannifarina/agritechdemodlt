@@ -5,10 +5,20 @@ https://archive.trufflesuite.com/docs/truffle/how-to/install/
 
 Gli script di test richiedono Node.js versione 18 e web3.js installato
 
+# Installa Environment Incompleto
+-  Ganache https://archive.trufflesuite.com/ganache/
+- nvm https://github.com/nvm-sh/nvm
+- Node 18 : nvm install 18
+- Python 3.12 https://www.howtogeek.com/install-latest-python-version-on-ubuntu/sud
+- build-essential
+- npm install -g node-gyp
+- npm install web3
+
 # Istruzioni Incomplete
 
-- truffle develop
-- migrate
+attenzione alla visibilità su windows https://ethereum.stackexchange.com/questions/130553/wsl-ubuntu-to-ganache-gui-on-windows-10-network-connection-error
+truffle compile
+truffle migrate --development
 
 # Note Lavoro
 
