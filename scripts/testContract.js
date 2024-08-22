@@ -7,7 +7,7 @@ const web3 = new Web3('http://172.19.112.1:7545');
 
 // Load the contract ABI and address
 const contractABI = JSON.parse(fs.readFileSync('../build/contracts/AgritechDemo.json')).abi;
-const contractAddress = '0xFEBb7251085b6fF35E6D78458Fe93808CEA4fa79cd'; // Replace with your deployed contract address
+const contractAddress = '0xFf1206dA3504C064da6ee6D131F57fD89db5e228'; // Replace with your deployed contract address
 
 // Create a contract instance
 const agritechDemo = new web3.eth.Contract(contractABI, contractAddress);
@@ -64,38 +64,26 @@ async function interactWithContract() {
         const updateTime = Math.floor(Date.now() / 1000);
         await agritechDemo.methods.storeIntegritySegment(cowId1, updateTime, hashResult).send({ from: device1 });
 
-        // TO TEST
-
         console.log('Dissociating device from cow...');
         const endTime = Math.floor(Date.now() / 1000);
         await agritechDemo.methods.dissociateDeviceToCow(cowId1, device1, endTime).send({ from: actor1 });
 
-        
-        /*
-
-        // Dissociate device from cow
-
-
-        // Transfer ownership
         console.log('Initiating ownership transfer...');
-        const transferTime = Math.floor(Date.now() / 1000);
-        await agritechDemo.methods.transferOwnership(cowId, actor1, transferTime).send({ from: actor2 });
+        transferTime = Math.floor(Date.now() / 1000);
+        await agritechDemo.methods.transferOwnership(cowId1, actor2, transferTime).send({ from: actor1, gas: '2000000' });
 
-        // Accept ownership
-        console.log('Accepting ownership...');
-        await agritechDemo.methods.acceptOwnership(cowId).send({ from: actor1 });
-
-        // Cancel transfer (this will fail as the transfer was already accepted, but included for completeness)
         console.log('Attempting to cancel transfer...');
-        try {
-            await agritechDemo.methods.cancelTransfer(cowId).send({ from: actor1 });
-        } catch (error) {
-            console.log('Cancel transfer failed as expected:', error.message);
-        }
+        await agritechDemo.methods.cancelTransfer(cowId1).send({ from: actor2 });
+
+        console.log('Initiating ownership transfer...');
+        transferTime = Math.floor(Date.now() / 1000);
+        await agritechDemo.methods.transferOwnership(cowId1, actor2, transferTime).send({ from: actor1, gas: '2000000' });
+
+        console.log('Accepting ownership...');
+        await agritechDemo.methods.acceptOwnership(cowId1).send({ from: actor2, gas: '2000000'  });
 
         console.log('All interactions completed successfully!');
 
-        */
 
     } catch (error) {
         console.error('An error occurred:', error);
