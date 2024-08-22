@@ -43,6 +43,9 @@ function validateRequest(body) {
       if (validationError) {
         return res.status(400).send(safeStringify({ error: validationError }));
       }
+
+      const reqCoqId = req.body.cowId;
+      const reqHash = req.body.hash;
   
       // Get the block range from the request body, or use default values
       const fromBlock = req.body.fromBlock || 0;
@@ -60,7 +63,36 @@ function validateRequest(body) {
         hash : event.returnValues.hash,
         lastTimestamp : event.returnValues.lastTimestamp
       }));
+
+      found = false;
+      for (const event of formattedEvents) {
+        console.log(event.cowId);
+        if (event.cowId == reqCoqId) {
+          found = true;
+          if (event.hash == reqHash) {
+            res.json({
+              correct: true,
+              message: "Correct Integrity Digest"
+            });
+            break;
+          }
+          else {
+            res.json({
+              correct: false,
+              message: "Wrong Integrity Digest"
+            });
+            break;
+          }
+        }
+      }
+      if (!found)
+        res.json({
+          correct: false,
+          message: "cowId not found"
+        });
+
   
+      /*
       // Log all events to the console
       console.log('All events:');
       formattedEvents.forEach((event, index) => {
@@ -68,6 +100,7 @@ function validateRequest(body) {
         console.log(safeStringify(event, null, 2));
         console.log('---');
       });
+
   
       // Send the response in JSON format
       res.setHeader('Content-Type', 'application/json');
@@ -75,11 +108,13 @@ function validateRequest(body) {
         status: 'success',
         data: formattedEvents
       }));
+      */
+     
     } catch (error) {
       console.error('Error fetching events:', error);
       res.status(500).send(safeStringify({
         status: 'error',
-        message: 'An error occurred while fetching events',
+        message: 'An error occurred',
         error: error.message
       }));
     }
