@@ -7,7 +7,7 @@ const web3 = new Web3('http://172.19.112.1:7545');
 
 // Load the contract ABI and address
 const contractABI = JSON.parse(fs.readFileSync('../build/contracts/AgritechDemo.json')).abi;
-const contractAddress = '0x76F485763e28b2D68aC5d8853eE636CE094EaD43'; // Replace with your deployed contract address
+const contractAddress = '0x5516092ed45a6fE0Af52Fb136c9055a1ae97f3Ad'; // Replace with your deployed contract address
 
 // Create a contract instance
 const agritechDemo = new web3.eth.Contract(contractABI, contractAddress);
