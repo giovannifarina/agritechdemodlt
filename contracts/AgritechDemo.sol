@@ -70,13 +70,13 @@ contract AgritechDemo {
     /* STATE VARIABLES */
 
     // Mappa address : ruolo, ruoli associati agli accounts. NOTA: quando la chiave non è presente da come valore di default 0, quindi ruolo NoPriviledge
-    mapping(address => Roles) internal addrToRole;
+    mapping(address => Roles) internal addrToRole; // può essere cambiata a public per debugging
     // Mappa idMucca : listaOwnership, sequenza di ownerships delle singole mucche
-    mapping(bytes14 => OwnershipData[]) internal cowOwnerships; 
+    mapping(bytes14 => OwnershipData[]) internal cowOwnerships; // può essere cambiata a public per debugging
     // Mappa address : IdActor-IdMucca, tiene traccia dell'associazione del collare ad eventuale gestore e mucca
-    mapping(address => DeviceAssociationData) internal deviceAssociations; 
+    mapping(address => DeviceAssociationData) internal deviceAssociations;  // può essere cambiata a public per debugging
     // Mappa idMucca : pendingOwner, tiene traccia dei cambi di ownership in stato pending
-    mapping(bytes14 => PendingOwnershipData) internal pendingOwnerships; 
+    mapping(bytes14 => PendingOwnershipData) internal pendingOwnerships; // può essere cambiata a public per debugging
     // Mappa idMucca : bool, tiene traccia del fatto che una mucca abbia associato un device (unicità di associazione + mucca senza collare prima del transfer)
     mapping(bytes14 => bool) internal hasCowAssociatedDevice;
 

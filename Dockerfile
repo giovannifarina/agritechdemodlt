@@ -34,9 +34,10 @@ RUN npm install -g node-gyp
 RUN npm install -g web3
 RUN npm install -g truffle
 
-
 # Set the working directory
 WORKDIR /root
+
+RUN git clone https://github.com/giovannifarina/agritechdemodlt
 
 # Keep the container running
 CMD ["/bin/bash"]
