@@ -7,11 +7,26 @@ const app = express();
 app.use(bodyParser.json());
 
 // Replace with your Ethereum node URL
-const providerUrl = 'http://172.19.112.1:7545';
+const providerUrl = 'http://172.19.112.1:7545'; //SET HERE THE RIGHT ADDRESS!!!
 const web3 = new Web3(new Web3.providers.HttpProvider(providerUrl));
 
 // Replace with your smart contract address and ABI
-const contractAddress = '0x5516092ed45a6fE0Af52Fb136c9055a1ae97f3Ad';
+//const contractAddress = '0x5516092ed45a6fE0Af52Fb136c9055a1ae97f3Ad';
+
+contractAddress = null;
+
+try {
+  // Read and parse the JSON file synchronously
+  const jsonData = JSON.parse(fs.readFileSync('../contract_address.json', 'utf8'));
+
+  // Retrieve the contract address
+  contractAddress = jsonData.address;
+
+  console.log('Contract address:', contractAddress);
+} catch (error) {
+  console.error('Error reading or parsing file:', error);
+}
+
 const contractABI = JSON.parse(fs.readFileSync('../build/contracts/AgritechDemo.json')).abi;
 
 const contract = new web3.eth.Contract(contractABI, contractAddress);

@@ -3,11 +3,25 @@ const fs = require('fs');
 const crypto = require('crypto');
 
 // Connect to an Ethereum network (replace with your network URL)
-const web3 = new Web3('http://172.19.112.1:7545');
+const web3 = new Web3('http://172.19.112.1:7545'); // SET HERE THE RIGHT ADDRESS!!!
 
 // Load the contract ABI and address
 const contractABI = JSON.parse(fs.readFileSync('../build/contracts/AgritechDemo.json')).abi;
-const contractAddress = '0xFf1206dA3504C064da6ee6D131F57fD89db5e228'; // Replace with your deployed contract address
+//const contractAddress = '0xFf1206dA3504C064da6ee6D131F57fD89db5e228'; // Replace with your deployed contract address
+
+contractAddress = null;
+
+try {
+    // Read and parse the JSON file synchronously
+    const jsonData = JSON.parse(fs.readFileSync('../contract_address.json', 'utf8'));
+  
+    // Retrieve the contract address
+    contractAddress = jsonData.address;
+  
+    console.log('Contract address:', contractAddress);
+} catch (error) {
+    console.error('Error reading or parsing file:', error);
+}
 
 // Create a contract instance
 const agritechDemo = new web3.eth.Contract(contractABI, contractAddress);
