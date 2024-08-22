@@ -65,7 +65,7 @@ module.exports = {
     // options below to some value.
     //
     development: {
-      host: "172.19.112.1",     // Localhost (default: none)
+      host: "host.docker.internal",     // Localhost (default: none)
       port: 7545,            // Standard Ethereum port (default: none)
       network_id: "5777",       // Any network (default: none)
     },
