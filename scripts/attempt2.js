@@ -33,18 +33,17 @@ function safeStringify(obj) {
       const fromBlock = req.body.fromBlock || 0;
       const toBlock = req.body.toBlock || 'latest';
   
-      // Get all events
-      const events = await contract.getPastEvents('allEvents', {
+      // Get IntegritySegment events
+      const events = await contract.getPastEvents('IntegritySegment', {
         fromBlock: fromBlock,
         toBlock: toBlock
       });
-  
+
       // Process and format the events
       const formattedEvents = events.map(event => ({
-        eventName: event.event,
-        blockNumber: event.blockNumber,
-        transactionHash: event.transactionHash,
-        returnValues: event.returnValues
+        cowId: event.returnValues.cowId,
+        hash : event.returnValues.hash,
+        lastTimestamp : event.returnValues.lastTimestamp
       }));
   
       // Log all events to the console
