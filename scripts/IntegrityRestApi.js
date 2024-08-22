@@ -47,7 +47,11 @@ function validateRequest(body) {
   return null; // Validation passed
 }
 
-  app.post('/get-events', async (req, res) => {
+function stringToHex(str) {
+  return '0x' + Buffer.from(str, 'utf8').toString('hex') + '000000000000000000000000000000000000';
+}
+
+  app.post('/check-integrity', async (req, res) => {
     try {
       // Ensure the request body is in JSON format
       if (!req.is('application/json')) {
@@ -59,7 +63,7 @@ function validateRequest(body) {
         return res.status(400).send(safeStringify({ error: validationError }));
       }
 
-      const reqCoqId = req.body.cowId;
+      const reqCoqId = stringToHex(req.body.cowId);
       const reqHash = req.body.hash;
   
       // Get the block range from the request body, or use default values
@@ -81,7 +85,12 @@ function validateRequest(body) {
 
       found = false;
       for (const event of formattedEvents) {
-        // console.log(event.cowId);
+        // C'è un bug qui! aggiunge padding!
+        console.log(typeof event.cowId);
+        console.log(event.cowId);
+        console.log(event.hash);
+        console.log(event.lastTimestamp);
+        console.log('___')
         if (event.cowId == reqCoqId) {
           found = true;
           if (event.hash == reqHash) {
