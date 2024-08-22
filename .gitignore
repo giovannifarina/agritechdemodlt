@@ -2,6 +2,6 @@ logs
 scripts/node_modules
 scripts/package-lock.json
 scripts/package.json
-build
 contract_address.json
+build/contracts/AgritechDemo.json
 build/contracts/AgritechDemo.json
