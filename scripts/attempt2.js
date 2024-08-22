@@ -20,13 +20,28 @@ function safeStringify(obj) {
     return JSON.stringify(obj, (key, value) =>
       typeof value === 'bigint' ? value.toString() : value
     );
+}
+
+function validateRequest(body) {
+  const requiredParams = ['cowId', 'hash']; // Add all required parameters here
+  const missingParams = requiredParams.filter(param => !(param in body));
+  
+  if (missingParams.length > 0) {
+    return `Missing required parameters: ${missingParams.join(', ')}`;
   }
+  return null; // Validation passed
+}
 
   app.post('/get-events', async (req, res) => {
     try {
       // Ensure the request body is in JSON format
       if (!req.is('application/json')) {
         return res.status(400).json({ error: 'Request must be in JSON format' });
+      }
+
+      const validationError = validateRequest(req.body);
+      if (validationError) {
+        return res.status(400).send(safeStringify({ error: validationError }));
       }
   
       // Get the block range from the request body, or use default values
