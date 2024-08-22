@@ -1,38 +1,3 @@
-# Agritech DEMO - Blockchain Component Elements
-
-Raccolta dei sorgenti delle componenti della Agritech Demo relativi alla Blockchain ed all'interazione con essa.
-
-Elenco Elementi Presenti:
-- Smart contract [AgritechDemo.sol](/contracts/AgritechDemo.sol);
-- Node.js scripts per l'interazione con lo smart contract [testContract.js](/scripts/testContract.js), [listenAllEvents.js](/scripts/listenAllEvents.js.md), [IntegrityRestApi.js](/scripts/IntegrityRestApi.js);
-- Dockerfile per ricreare parzialmente l'ambiente di sviluppo [Dockerfile](/Dockerfile).
-
-E' stato utilizzato [Truffle](https://archive.trufflesuite.com/) come framework di sviluppo per lo smart contract e [Ganache](https://archive.trufflesuite.com/ganache/) come EVM-compatible Blockchain di test.
-
-## Installazione
-
-E' necessario installare diverse compomenti software al fine di poter testare l'intero codebase
-
-### Blockchain
-E' necessaria una EVM-compatible blockchain operativa al fine di poter fare il deployment dello smart-contract ed interagirvi
-
-Per il solo testing dello smart contract e' possibile utilizzare [Remix IDE](https://remix.ethereum.org/) clonando il repository all'interno dell'IDE. Non dovrebbe essere possibile l'interazione dall'esterno dell'IDE, non dovrebbe essere possibile tramite solo REMIX IDE testare l'interazione con lo smart contract.
-
-Installando [Ganache](https://archive.trufflesuite.com/ganache/) è possibile avere una blockchain operativa sulla propria macchina per il testing, con in quale interagire attraverso vari strumenti (anche REMIX IDE).
-
-### Ambiente di Sviluppo
-
-E' necessario un ambiente di sviluppo Node.js per l'interazione ed il deployment semplificato dello smart contract.
-In particolare, sono richiesti:
-- Node 18
-- Python 3.12, node-gyp
-- Truffle
-- web3
-
-Per semplificare la creazione dell'ambiente di sviluppo è stata definita un'immagine Docker di un Ubuntu conteiner con i software di sviluppo già installati. Installando Docker e VS-Code è possibile sviluppare e testare l'environment direttamente dal container.
-
-...
-
 Truffle Project, testabile con Ganache o Remix
 
 MANTENGO IN SOLO INTEGRITY SEGMENT, si può aggiornare
