@@ -7,7 +7,7 @@ const web3 = new Web3('http://172.19.112.1:7545');
 
 // Load the contract ABI and address
 const contractABI = JSON.parse(fs.readFileSync('../build/contracts/AgritechDemo.json')).abi;
-const contractAddress = '0x5516092ed45a6fE0Af52Fb136c9055a1ae97f3Ad'; // Replace with your deployed contract address
+const contractAddress = '0xFEBb7251085b6fF35E6D78458Fe93808CEA4fa79'; // Replace with your deployed contract address
 
 // Create a contract instance
 const agritechDemo = new web3.eth.Contract(contractABI, contractAddress);
@@ -58,34 +58,23 @@ async function interactWithContract() {
 
         const filePath = '../gpsLogExample.json';
         hashResult = computeJsonSha3FromFile(filePath);
+        console.log('Computed integrity Segment: %s',hashResult);
 
         console.log('Storing integrity segment...');
         const updateTime = Math.floor(Date.now() / 1000);
         await agritechDemo.methods.storeIntegritySegment(cowId1, updateTime, hashResult).send({ from: device1 });
 
-        
-        /*
-        // Add cow
-        console.log('Adding new cow...');
-        const cowId = "12345678901234";
-        const registrationTime = Math.floor(Date.now() / 1000);
-        await agritechDemo.methods.addCow(cowId, registrationTime).send({ from: actor2 });
+        // TO TEST
 
-        // Associate device to cow
-        console.log('Associating device to cow...');
-        const startTime = Math.floor(Date.now() / 1000);
-        await agritechDemo.methods.associateDeviceToCow(cowId, device1, startTime).send({ from: actor2 });
-
-        // Store integrity segment
-        console.log('Storing integrity segment...');
-        const updateTime = Math.floor(Date.now() / 1000);
-        const gpshash = web3.utils.sha3('Some GPS data');
-        await agritechDemo.methods.storeIntegritySegment(cowId, updateTime, gpshash).send({ from: device1 });
-
-        // Dissociate device from cow
         console.log('Dissociating device from cow...');
         const endTime = Math.floor(Date.now() / 1000);
-        await agritechDemo.methods.dissociateDeviceToCow(cowId, device1, endTime).send({ from: actor2 });
+        await agritechDemo.methods.dissociateDeviceToCow(cowId1, device1, endTime).send({ from: actor1 });
+
+        
+        /*
+
+        // Dissociate device from cow
+
 
         // Transfer ownership
         console.log('Initiating ownership transfer...');

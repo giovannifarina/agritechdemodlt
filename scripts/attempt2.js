@@ -66,7 +66,7 @@ function validateRequest(body) {
 
       found = false;
       for (const event of formattedEvents) {
-        console.log(event.cowId);
+        // console.log(event.cowId);
         if (event.cowId == reqCoqId) {
           found = true;
           if (event.hash == reqHash) {
@@ -109,7 +109,7 @@ function validateRequest(body) {
         data: formattedEvents
       }));
       */
-     
+
     } catch (error) {
       console.error('Error fetching events:', error);
       res.status(500).send(safeStringify({
