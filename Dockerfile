@@ -33,11 +33,13 @@ ENV PATH=$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 RUN npm install -g node-gyp
 RUN npm install -g web3
 RUN npm install -g truffle
+RUN npm install -g dotenv
+RUN npm install -g @truffle/hdwallet-provider
 
 # Set the working directory
 WORKDIR /root
 
-RUN git clone https://github.com/giovannifarina/agritechdemodlt
+#RUN git clone https://github.com/giovannifarina/agritechdemodlt
 
 # Keep the container running
 CMD ["/bin/bash"]

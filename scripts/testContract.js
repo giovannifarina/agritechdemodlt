@@ -1,9 +1,10 @@
 const { Web3 } = require('web3');
 const fs = require('fs');
 const crypto = require('crypto');
+require('dotenv').config();
 
 // Connect to an Ethereum network (replace with your network URL)
-const web3 = new Web3('http://172.19.112.1:7545'); // SET HERE THE RIGHT ADDRESS!!!
+const web3 = new Web3('http://127.0.0.1:8545'); // SET HERE THE RIGHT ADDRESS!!!
 
 // Load the contract ABI and address
 const contractABI = JSON.parse(fs.readFileSync('../build/contracts/AgritechDemo.json')).abi;
@@ -28,19 +29,39 @@ const agritechDemo = new web3.eth.Contract(contractABI, contractAddress);
 
 async function interactWithContract() {
     try {
-        // Get accounts from Ganache
-        const accounts = await web3.eth.getAccounts();
-        console.log('Accounts:', accounts);
 
-        const admin1 = accounts[0];
-        const admin2 = accounts[1];
+      const wallet = web3.eth.accounts.wallet.add(
+        '0x8f2a55949038a9610f50fb23b5883af3b4ecb3c3bb792cbcefbd1542c692be63'
+      );
+
+      web3.eth.accounts.wallet.add(
+        '0xc87509a1c067bbde78beb793e6fa76530b6382a4c0241e5e4a9ec0a0f44dc0d3'
+      );
+      
+      console.log(wallet[0].address);
+      
+      console.log(wallet[0].privateKey);
+
+      console.log(wallet[1].address);
+      
+      console.log(wallet[1].privateKey);
+
+      // WORK IN PROGRESS...
+
+
+        const admin1 = wallet[0].address;
+        const admin2 = wallet[1].address;
+        /*
         const actor1 = accounts[2];
         const actor2 = accounts[3];
         const device1 = accounts[4];
         const device2 = accounts[5]
+        */
         
         console.log('Registering second admin2');
         await agritechDemo.methods.registerNewAdmin(admin2).send({ from: admin1 });
+
+        /*
 
         console.log('Registering actor1');
         await agritechDemo.methods.registerNewActor(actor1).send({ from: admin1 });
@@ -97,6 +118,8 @@ async function interactWithContract() {
         await agritechDemo.methods.acceptOwnership(cowId1).send({ from: actor2, gas: '2000000'  });
 
         console.log('All interactions completed successfully!');
+
+        */
 
 
     } catch (error) {
