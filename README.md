@@ -7,7 +7,7 @@ Elenco Elementi Presenti:
 - Node.js scripts per l'interazione con lo smart contract [testContract.js](/scripts/testContract.js), [listenAllEvents.js](/scripts/listenAllEvents.js.md), [IntegrityRestApi.js](/scripts/IntegrityRestApi.js);
 - Dockerfile per ricreare parzialmente l'ambiente di sviluppo [Dockerfile](/Dockerfile).
 
-E' stato utilizzato [Truffle](https://archive.trufflesuite.com/) come framework di sviluppo per lo smart contract e [Ganache](https://archive.trufflesuite.com/ganache/) come EVM-compatible Blockchain di test.
+E' stato utilizzato [Truffle](https://archive.trufflesuite.com/) come framework di sviluppo per lo smart contract e [Besu Quickstart Example](https://besu.hyperledger.org/stable/private-networks/tutorials/quickstart) come EVM-compatible Blockchain di test.
 
 ## Obiettivi della DEMO
 

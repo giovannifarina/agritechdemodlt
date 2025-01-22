@@ -7,7 +7,7 @@ const app = express();
 app.use(bodyParser.json());
 
 // Replace with your Ethereum node URL
-const providerUrl = 'http://172.19.112.1:7545'; //SET HERE THE RIGHT ADDRESS!!!
+const providerUrl = 'http://127.0.0.1:8545'; //SET HERE THE RIGHT ADDRESS!!!
 const web3 = new Web3(new Web3.providers.HttpProvider(providerUrl));
 
 // Replace with your smart contract address and ABI
@@ -144,7 +144,7 @@ function stringToHex(str) {
     }
   });
 
-const port = 3000;
+const port = 3001;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
